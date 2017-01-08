@@ -1,0 +1,21 @@
+---
+title: "My Fancy Presentation"
+author: "Habibu A"
+date: "1/8/2017"
+output: ioslides_presentation
+---
+
+## Slide with R code not evaluated
+```{r, comment="", eval=FALSE}
+head(mtcars)
+```
+
+## Slide with R code evaluated
+```{r, comment="", eval=TRUE}
+head(mtcars)
+```
+
+## Plot Fig
+```{r, echo=FALSE, fig.align='center', fig.cap="Monthly Interests"}
+plot(mtcars$wt, mtcars$mpg, xlab = "Weight", ylab = "MPG", title(main = "Car Weight vs MPG"))
+```
