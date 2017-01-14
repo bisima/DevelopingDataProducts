@@ -1,0 +1,37 @@
+---
+title: "Peer-graded Assignment: R Markdown and Leaflet"
+author: "Habibu Atib"
+date: "1/14/2017"
+output: html_document
+---
+
+## Maps of Kampala Capital City of Uganda and 7 Major Towns
+
+Kampala is the capital city of Uganda; Mbale, Mbarara, Gulu, Lira, Masaka, Kasese and Jinja are major towns in Uganda.
+
+The size of the circle shows population size compared to other town population. Click on the marker to see more information about that town.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(leaflet)
+ug_towns <- data.frame(name = c("Kampala", "Mbale", "Mbarara", "Gulu", "Lira", "Masaka", "Kasese", "Jinja"), 
+                        pop = c(1507080, 96189, 195013, 152276, 99059,103829, 101679 ,72931),
+                        lat = c(0.3476, 1.0784, -0.60467, 2.77457, 2.2499,-0.33379, 0.18333, 0.43902),
+                        lng = c(32.5825, 34.1810, 30.6545, 32.29899,32.89985,31.73409, 30.08333, 33.20317))
+townSites <- 
+        c("<a href='https://en.wikipedia.org/wiki/Kampala'>Kampala Capital City of Uganda </a>",
+"<a href='https://en.wikipedia.org/wiki/Mbale'> Mbale in Eastern Uganda</a>",
+"<a href='https://en.wikipedia.org/wiki/Mbarara'>Mbarara in Western Uganda </a>",
+"<a href='https://en.wikipedia.org/wiki/Gulu'> Gulu in Northern Uganda </a>",
+"<a href='https://en.wikipedia.org/wiki/Lira,_Uganda'>Lira in Northern Uganda</a>",
+"<a href='https://en.wikipedia.org/wiki/Masaka'>Masaka in Southern Uganda</a>",
+"<a href='https://en.wikipedia.org/wiki/Kasese'>Kasese in Western Uganda</a>",
+"<a href='https://en.wikipedia.org/wiki/Jinja,_Uganda'>Jinja in Eastern Uganda</a>"
+)
+
+ug_towns %>%
+leaflet() %>%
+addTiles() %>%
+addCircles(weight = 3, color = "red", radius = sqrt(ug_towns$pop) * 40) %>%
+addMarkers(popup=townSites)
+```
