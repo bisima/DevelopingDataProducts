@@ -1,0 +1,42 @@
+---
+title: 'Peer-graded Assignment: R Markdown Presentation & Plotly'
+author: "Habibu A"
+date: "1/21/2017"
+output: slidy_presentation
+---
+
+## Introduction
+
+The historical population (1951 - 2017) and population growth rate (1952 - 2017) of 5 EastAfrican countries; namely Burundi, Kenya, Rwanda, Tanzania and Uganda.
+
+The data is given as of 1st of January of an year.
+
+## East Africa Historical population (1951 - 2017)
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+library(plotly)
+set.seed(435)
+t <- read.csv('eastAfricanPop.csv', stringsAsFactors=FALSE, header=TRUE)
+t <- as.data.frame(t)
+t$Country <- as.factor(t$Country)
+growth <- t[t$GrowthRate!='N/A %',c(1,2,4)]
+growth$GrowthRate <- as.numeric(growth$GrowthRate)
+pop <- t[,c(1,3,4)]
+plot_ly(pop,x= ~Year,y= ~Population,color= ~Country,mode='lines')
+```
+
+## East Africa Population Growth Rate 1952 - 2017
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+library(plotly)
+set.seed(435)
+t <- read.csv('eastAfricanPop.csv', stringsAsFactors=FALSE, header=TRUE)
+t <- as.data.frame(t)
+t$Country <- as.factor(t$Country)
+growth <- t[t$GrowthRate!='N/A %',c(1,2,4)]
+growth$GrowthRate <- as.numeric(growth$GrowthRate)
+pop <- t[,c(1,3,4)]
+plot_ly(growth,x=~Year,y=~GrowthRate,color=~Country, mode='lines')
+```
+
+## Thank You
